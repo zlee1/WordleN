@@ -16,23 +16,49 @@ inc_btn.addEventListener('click', () => {
       addColumn("game_tbl");
     }
   }
+  clear_board("game_tbl");
 });
 
 dec_btn.addEventListener('click', () => {
   val = parseInt(output.innerHTML);
-  if(val > 3){
+  if(val > 2){
     output.innerHTML = val-1;
     for(var i = val-1; i <= tbl.rows[0].cells.length; i++){
       deleteColumn("game_tbl");
     }
   }
+  clear_board("game_tbl");
 });
+
+function clear_board(id){
+  tbl = document.getElementById(id);
+  for(var i = 0; i < tbl.rows.length; i++){
+    for(var j = 0; j < tbl.rows[i].cells.length; j++)
+      tbl.rows[i].cells[j].innerHTML = "";
+  }
+}
 
 var button = document.getElementById("guess_btn");
 var guess = document.getElementById("guess_txt");
 
 button.addEventListener('click', () => {
   console.log(guess.value);
+
+  if(guess.value.length == tbl.rows[0].cells.length){
+    var cur_row = 0;
+    for(var row = 0; row < tbl.rows.length; row++){
+      if(tbl.rows[row].cells[0].innerHTML == ""){
+        cur_row = row;
+        break;
+      }
+    }
+    for(var i = 0; i < guess.value.length; i++){
+      tbl.rows[cur_row].cells[i].innerHTML = guess.value[i].toUpperCase();
+    }
+  }else{
+    console.log("Invalid Guess");
+    console.log(guess.value.length);
+  }
   guess.value = null;
 });
 
