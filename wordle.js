@@ -32,6 +32,7 @@ dec_btn.addEventListener('click', () => {
 
 function clear_board(id){
   chosen = null;
+  button.value = "Guess";
   tbl = document.getElementById(id);
   for(var i = 0; i < tbl.rows.length; i++){
     for(var j = 0; j < tbl.rows[i].cells.length; j++)
@@ -75,19 +76,18 @@ function get_info(guess){
             w_count += 1;
           }
         }
-        for(var j = 0; j < chosen.length; j++){
-          if(u_count[j] == guess[i]){
+        for(var j = 0; j < used_letters.length; j++){
+          if(used_letters[j] == guess[i]){
             u_count += 1;
           }
         }
         if(w_count > u_count){
           colors[i] = "yellow";
-          used_letters.push(guess[i]);
         }
       }else{
         colors[i] = "yellow";
-        used_letters.push(guess[i]);
       }
+      used_letters.push(guess[i]);
     }
   }
 
@@ -126,7 +126,6 @@ button.addEventListener('click', () => {
 
   if(chosen == null){
     chosen = choose_word(tbl.rows[0].cells.length);
-    console.log(chosen);
   }
 
   if(guess.value == chosen){
@@ -147,6 +146,11 @@ button.addEventListener('click', () => {
       tbl.rows[cur_row].cells[i].innerHTML = guess.value[i].toUpperCase();
     }
     set_colors(get_info(guess.value), cur_row);
+
+    if(cur_row == tbl.rows.length-1){
+      button.value = "Restart";
+    }
+
   }
   guess.value = null;
 });
