@@ -11,7 +11,6 @@ fetch(url)
     .then(response => response.text())
     .then(text => {
         words = JSON.parse(text);
-        console.log(words)
     });
 
 for(var i = tbl.rows[0].cells.length; i < parseInt(output.innerHTML); i++){
