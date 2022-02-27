@@ -18,6 +18,9 @@ for(var i = tbl.rows[0].cells.length; i < parseInt(output.innerHTML); i++){
 }
 
 inc_btn.addEventListener('click', () => {
+  if(dec_btn.disabled == true){
+    dec_btn.disabled = false;
+  }
   val = parseInt(output.innerHTML);
   if(val < 15){
     output.innerHTML = val+1;
@@ -26,9 +29,15 @@ inc_btn.addEventListener('click', () => {
     }
   }
   clear_board("game_tbl");
+  if(val == 15){
+    inc_btn.disabled = true;
+  }
 });
 
 dec_btn.addEventListener('click', () => {
+  if(inc_btn.disabled == true){
+    inc_btn.disabled = false;
+  }
   val = parseInt(output.innerHTML);
   if(val > 2){
     output.innerHTML = val-1;
@@ -37,6 +46,9 @@ dec_btn.addEventListener('click', () => {
     }
   }
   clear_board("game_tbl");
+  if(val == 2){
+    dec_btn.disabled = true;
+  }
 });
 
 function clear_board(id){
