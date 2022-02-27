@@ -4,6 +4,15 @@ var output = document.getElementById("length_lbl");
 var tbl = document.getElementById("game_tbl");
 var chosen = null;
 
+url = "https://raw.githubusercontent.com/zlee1/WordleN/master/data/generated/word_set.json"
+
+fetch(url)
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+        // Do stuff with the contents of the JSON file here
+    });
+
 for(var i = tbl.rows[0].cells.length; i < parseInt(output.innerHTML); i++){
   addColumn("game_tbl");
 }
